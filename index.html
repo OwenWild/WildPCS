@@ -1,11 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WILD PC's</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your PC Builder</title>
+    <meta name="description" content="Custom PCs, clean and simple." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        (function () {
+            const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+            document.documentElement.setAttribute('data-theme', saved || 'dark');
+        })();
+    </script>
+    <meta name="theme-color" content="#0f1116"> <!-- default -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f1116" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <h1>Hello World</h1>
-</body>
-</html>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#">
+                <span class="brand-mark" aria-hidden="true">◆</span>
+                <span class="brand-name">Your PC Builder</span>
+            </a>
+
+            <nav class="nav">
+                <ul class="menu">
+                    <li><a href="#" aria-current="page">Home</a></li>
+                    <li><a href="build.html">Build</a></li>
+                    <li><a href="#inventory.html">Current Inventory</a></li>
+                    <li><a href="#contact.html">Support</a></li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </header>
+
+
+    <main id="main">
+        <section class="section hero">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <h1>Crisp. Quiet. Custom.</h1>
+                    <p>Create a PC that fits your work and play—no clutter, just performance.</p>
+                    <div class="hero-actions">
+                        <a class="btn" href="contact.html">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="pc-card"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section tiles">
+            <div class="container grid-3">
+                <article class="card">
+                    <h3>Balanced Parts</h3>
+                    <p>Hand-picked components that just work together.</p>
+                </article>
+                <article class="card">
+                    <h3>Thermal Tested</h3>
+                    <p>Airflow-first layouts with stress-tested stability.</p>
+                </article>
+                <article class="card">
+                    <h3>Transparent Pricing</h3>
+                    <p>See the cost of every part—no surprises.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <small>© <span id="year"></span> Your PC Builder</small>
+        </div>
+    </footer>
+
+   
+</body >
+</html >

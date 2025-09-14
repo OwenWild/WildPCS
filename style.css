@@ -1,15 +1,168 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,700&display=swap');
+/* ---------- Font ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+/* ---------- Base resets ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.container { width: min(1120px, 92%); margin-inline: auto; }
+:where(a, button):focus-visible{ outline: 3px solid var(--focus); outline-offset: 2px; }
+.skip-link { position: absolute; left:-9999px; top:-9999px; }
+.skip-link:focus { left:1rem; top:1rem; background: var(--brand); color: var(--brand-contrast); padding:.5rem .75rem; border-radius:.5rem; }
+/* Make the page canvas match your design */
+html {
+  /* solid color behind any gradients */
+  background-color: var(--bg-subtle);
+}
+
+/* Ensure the background always fills the viewport */
+body {
+  min-height: 100svh;              /* covers full screen on mobile/desktop */
+  background-color: var(--bg-subtle); /* fallback if gradients don't render */
+  background:
+    radial-gradient(1200px 700px at 80% -10%, var(--bg-tint), transparent 60%),
+    linear-gradient(var(--bg), var(--bg-subtle));
+  background-repeat: no-repeat;
+  /* optional on desktop for a “fixed” feel; skip on mobile for perf */
+  /* background-attachment: fixed, fixed; */
+}
+
+/* If you're using dark mode tokens, this keeps overscroll dark too */
+:root[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+  html { background-color: var(--bg-subtle); }
+  body { background-color: var(--bg-subtle); }
+}
+<!-- in <head> -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1116" media="(prefers-color-scheme: dark)">
 
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    position: relative;
-    scroll-behavior: smooth;
-    font-family: Roboto, sans-serif;
-    list-style-type: none;
-    background-color: red;
-    font-size: 30px;
+
+/* Manual overrides via data-theme attribute (highest priority) */
+:root[data-theme="light"]{
+  --bg: #ffffff;
+  --bg-tint: rgba(125,73,214,0.06);
+  --bg-subtle: #f7f8fc;
+  --surface: #ffffff;
+  --text: #111217;
+  --muted: var(--gray-500);
+  --border: var(--gray-300);
+  --hover: #f3f4f9;
+  --brand: var(--purple-600);
+  --brand-contrast: #ffffff;
+  --focus: var(--purple-300);
+  --header-bg: rgba(255,255,255,.85);
+}
+:root[data-theme="dark"]{
+  --bg: #0f1116;
+  --bg-tint: rgba(125,73,214,0.08);
+  --bg-subtle: #0b0d12;
+  --surface: #141720;
+  --text: #e8ebf2;
+  --muted: #a2a9b8;
+  --border: #2b3040;
+  --hover: rgba(255,255,255,0.06);
+  --brand: #9a78e3;
+  --brand-contrast: #0d0e11;
+  --focus: #bda9f1;
+  --header-bg: rgba(13,14,17,.75);
+}
+
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 80% -10%, var(--bg-tint), transparent 60%),
+    linear-gradient(var(--bg), var(--bg-subtle));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top:0; z-index: 20;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: grid; grid-template-columns:auto 1fr auto;
+  align-items: center; gap: 1rem; padding:.8rem 0;
+}
+.brand { display:inline-flex; align-items:center; gap:.6rem; }
+.brand-mark {
+  width:28px; height:28px; display:grid; place-items:center;
+  border-radius:8px; background: color-mix(in srgb, var(--brand) 16%, white);
+  color: var(--brand);
+  border:1px solid var(--border);
+}
+.brand-name { font-weight:700; letter-spacing:.2px; }
+
+.nav .menu {
+  display:flex; gap:.75rem; list-style:none; margin:0; padding:0; justify-content:flex-end;
+}
+.menu a { padding:.5rem .65rem; border-radius:.6rem; color: var(--muted); }
+.menu a[aria-current="page"]{ color: var(--text); font-weight:600; }
+.menu a:hover { background: var(--hover); color: var(--text); }
+
+/* Theme toggle button */
+.theme-toggle { margin-left: .5rem; }
+
+/* ---------- Sections ---------- */
+.section { padding: clamp(2.5rem, 6vw, 5rem) 0; }
+.hero-inner {
+  display:grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items:center;
+}
+.hero h1 { margin:0 0 .5rem; font-size: clamp(2rem, 5vw, 3rem); line-height:1.1; }
+.hero p { color: var(--muted); max-width: 58ch; }
+.hero-actions { display:flex; gap:.75rem; margin-top:1rem; }
+
+/* Device card */
+.hero .pc-card{
+  height: 280px; border-radius: 20px;
+  background:
+    linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--brand) 6%, var(--surface)) 60%),
+    repeating-linear-gradient(45deg, transparent, transparent 12px, color-mix(in srgb, var(--brand) 10%, transparent) 12px, color-mix(in srgb, var(--brand) 10%, transparent) 24px);
+  border:1px solid var(--border);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* ---------- Cards / Grid ---------- */
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.card {
+  background: var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding: 1rem;
+}
+.card h3 { margin:.1rem 0 .35rem; font-size:1.05rem; }
+.card p { margin:0; color: var(--muted); }
+
+/* ---------- Buttons ---------- */
+.btn{
+  --btn-bg: var(--brand); --btn-fg: var(--brand-contrast);
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.7rem 1rem; border-radius:.8rem; border:1px solid transparent;
+  font-weight:600; letter-spacing:.2px; transition: filter .2s ease, transform .04s ease;
+  background: var(--btn-bg); color: var(--btn-fg);
+}
+.btn:active{ transform: translateY(1px); }
+.btn-primary{}
+.btn-ghost{ background: transparent; border:1px solid var(--border); color: var(--text); }
+.btn:hover{ filter: brightness(1.05); }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top:1px solid var(--border); background: var(--surface); }
+.footer-inner { padding: 1rem 0; color: var(--muted); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px){
+  .hero-inner{ grid-template-columns: 1fr; }
+  .grid-3{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px){
+  .grid-3{ grid-template-columns: 1fr; }
+  .menu{ display:none; } /* minimal for now; add your dropdown later */
 }
