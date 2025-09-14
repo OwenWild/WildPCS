@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Current Inventory — Your PC Builder</title>
+  <meta name="theme-color" content="#0f1116">
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // Respect saved preference; default to dark
+    (function(){const s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||'dark');})();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-name">Your PC Builder</span>
+      </a>
+      <nav class="nav">
+        <ul class="menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./build.html">Build</a></li>
+          <li><a href="./inventory.html" aria-current="page">Current Inventory</a></li>
+          <li><a href="./contact.html">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container" style="max-width:1100px;">
+      <h1 class="section-title">Current Inventory</h1>
+      <p class="muted">In-stock systems ready to ship. Filter below or click a row for details.</p>
+
+      <!-- Filter -->
+      <div class="card" style="padding:1rem; margin-bottom:1rem;">
+        <div class="form-body" style="display:grid; gap:.75rem;">
+          <div class="form-group">
+            <label for="invSearch">Search</label>
+            <input id="invSearch" type="text" placeholder="Search by name, CPU, GPU, RAM, storage, SKU…">
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory table -->
+      <div class="card" style="overflow:auto;">
+        <table class="table" id="invTable" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>CPU</th>
+              <th>GPU</th>
+              <th>RAM</th>
+              <th>Storage</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>SKU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Sample rows — replace with real stock -->
+            <tr tabindex="0">
+              <td>Astra</td>
+              <td>Ryzen 5 5600</td>
+              <td>RTX 4060</td>
+              <td>16GB</td>
+              <td>1TB NVMe</td>
+              <td>$1,199</td>
+              <td>In stock</td>
+              <td>AST-5600-4060-16/1</td>
+            </tr>
+            <tr tabindex="0">
+              <td>Lyra</td>
+              <td>Intel i7-13700F</td>
+              <td>RTX 4070 Super</td>
+              <td>32GB</td>
+              <td>2TB NVMe</td>
+              <td>$1,999</td>
+              <td>Low stock</td>
+              <td>LYR-13700F-4070S-32/2</td>
+            </tr>
+            <tr tabindex="0">
+              <td>Orion</td>
+              <td>Ryzen 9 7950X</td>
+              <td>RTX 4090</td>
+              <td>64GB</td>
+              <td>4TB NVMe</td>
+              <td>$3,999</td>
+              <td>Pre-order</td>
+              <td>ORI-7950X-4090-64/4</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <a class="btn btn-ghost" href="./index.html">Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>© <span id="year"></span> Your PC Builder</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    // Lightweight client-side filter
+    (function(){
+      const q = document.getElementById('invSearch');
+      const rows = Array.from(document.querySelectorAll('#invTable tbody tr'));
+      q.addEventListener('input', () => {
+        const val = q.value.toLowerCase().trim();
+        rows.forEach(tr => {
+          const text = tr.textContent.toLowerCase();
+          tr.style.display = text.includes(val) ? '' : 'none';
+        });
+      });
+
+      // Optional: "row click" placeholder (wire to product pages later)
+      rows.forEach(tr => tr.addEventListener('click', () => {
+        // Replace alert with window.location = 'product.html?sku=...'
+        const sku = tr.cells[7]?.textContent || '';
+        alert('Open details for ' + sku + ' (wire this up later).');
+      }));
+    })();
+  </script>
+</body>
+</html>
