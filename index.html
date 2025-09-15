@@ -4,16 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your PC Builder</title>
+    <title>WILD PC's</title>
     <meta name="description" content="Custom PCs, clean and simple." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script>
-        (function () {
-            const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
-            document.documentElement.setAttribute('data-theme', saved || 'dark');
-        })();
-    </script>
+    
     <meta name="theme-color" content="#0f1116"> <!-- default -->
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0f1116" media="(prefers-color-scheme: dark)">
@@ -27,7 +22,7 @@
         <div class="container header-inner">
             <a class="brand" href="./index.html">
                 <span class="brand-mark" aria-hidden="true">◆</span>
-                <span class="brand-name">Your PC Builder</span>
+                <span class="brand-name">WILD PCs</span>
             </a>
 
             <nav class="nav">
@@ -43,6 +38,7 @@
 
 
     <main id="main">
+
         <section class="section hero">
             <div class="container hero-inner">
                 <div class="hero-copy">
@@ -53,10 +49,54 @@
                     </div>
                 </div>
                 <div class="hero-art" aria-hidden="true">
-                    <div class="pc-card"></div>
+                    <div class="pc-card">
+                        <!-- ABOUT -->
+                        <section class="section about">
+                            <div class="container about-inner">
+                                <div class="about-copy">
+                                    <h2>About Me</h2>
+                                    <p class="muted">
+                                        I build quiet, reliable custom PCs—tuned for gaming, creative work, and
+                                        day-to-day stability. Every system is assembled, cable-managed, and
+                                        stress-tested before it leaves my bench.
+                                    </p>
+                                </div>
+
+                        
+                            </div>
+                        </section>
+
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- GALLERY / SLIDESHOW -->
+        <section class="section gallery">
+            <div class="container">
+                <div class="carousel" id="mainCarousel" aria-label="Showcase">
+                    <div class="carousel-viewport">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- slides injected by JS -->
+                        </div>
+
+                        <!-- light grey controls -->
+                        <button class="carousel-btn prev" aria-label="Previous slide">
+                            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                                <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-btn next" aria-label="Next slide">
+                            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <section class="section tiles">
             <div class="container grid-3">
@@ -82,6 +122,68 @@
         </div>
     </footer>
 
+    <script>
+        // === Configure your images here ===
+        // Put files in ./assets/pictures/ and list them below.
+        const CAROUSEL_IMAGES = [
+            "image1.jpg",
+            "image2.jpg",
+            "image3.jpg"
+        ].map(n => `./assets/pictures/${n}`);
+
+        (function () {
+            const track = document.getElementById('carouselTrack');
+            const prev = document.querySelector('.carousel-btn.prev');
+            const next = document.querySelector('.carousel-btn.next');
+            let index = 0, timer;
+
+            // Build slides
+            CAROUSEL_IMAGES.forEach((src, i) => {
+                const slide = document.createElement('figure');
+                slide.className = 'slide';
+                slide.innerHTML = `
+        <img src="${src}" alt="Showcase image ${i + 1}" loading="lazy" decoding="async">
+      `;
+                track.appendChild(slide);
+            });
+
+            const slides = Array.from(document.querySelectorAll('.slide'));
+
+            function goTo(i) {
+                if (!slides.length) return;
+                index = (i + slides.length) % slides.length;
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
+
+            function start() {
+                stop();
+                timer = setInterval(() => goTo(index + 1), 5000);
+            }
+            function stop() { if (timer) clearInterval(timer); }
+
+            // Controls
+            prev.addEventListener('click', () => { goTo(index - 1); start(); });
+            next.addEventListener('click', () => { goTo(index + 1); start(); });
+
+            // Pause on hover/focus
+            const viewport = document.querySelector('.carousel-viewport');
+            viewport.addEventListener('mouseenter', stop);
+            viewport.addEventListener('mouseleave', start);
+            viewport.addEventListener('focusin', stop);
+            viewport.addEventListener('focusout', start);
+
+            // Keyboard: ← →
+            viewport.tabIndex = 0;
+            viewport.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+                if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+            });
+
+            // Kick off
+            goTo(0);
+            start();
+        })();
+    </script>
 
 </body>
 

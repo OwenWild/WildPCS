@@ -166,3 +166,139 @@ body {
   .grid-3{ grid-template-columns: 1fr; }
   .menu{ display:none; } /* minimal for now; add your dropdown later */
 }
+/* ===== Carousel ===== */
+.gallery .carousel {
+  position: relative;
+}
+
+.carousel-viewport{
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  /* pick an aspect ratio you like */
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+.carousel-track{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .45s ease;
+}
+
+.slide{
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+}
+.slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* fills nicely regardless of image size */
+  display: block;
+}
+
+/* Light grey controls (stay light in both themes) */
+:root{
+  --carousel-btn-bg: #e9ecf2;   /* light grey */
+  --carousel-btn-fg: #222631;   /* icon color */
+  --carousel-btn-border: #d6dbe6;
+}
+.carousel-btn{
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--carousel-btn-border);
+  background: var(--carousel-btn-bg);
+  color: var(--carousel-btn-fg);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  cursor: pointer;
+  transition: transform .08s ease, filter .2s ease;
+}
+.carousel-btn:hover{ filter: brightness(1.03); }
+.carousel-btn:active{ transform: scale(.98); }
+.carousel-btn.prev{ left: .75rem; }
+.carousel-btn.next{ right: .75rem; }
+.carousel-btn:focus-visible{
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Mobile: make buttons a touch larger and ratio taller */
+@media (max-width: 640px){
+  .carousel-viewport{ aspect-ratio: 4 / 3; }
+  .carousel-btn{ width: 48px; height: 48px; }
+}
+/* default: fill the frame */
+.slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* if JS marks a slide as portrait, show it fully and letterbox */
+.slide.portrait img{
+  object-fit: contain;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+/* give the viewport a comfortable ratio and keep buttons fully inside */
+.carousel-viewport{
+  aspect-ratio: 16 / 9;          /* desktop default */
+}
+@media (max-width: 640px){
+  .carousel-viewport{ aspect-ratio: 4 / 3; } /* taller on phones */
+}
+@media (min-width: 1280px){
+  .carousel-viewport{ aspect-ratio: 21 / 9; } /* wider on big screens */
+}
+.carousel-btn.prev{ left: 1rem; }
+.carousel-btn.next{ right: 1rem; }
+
+
+/* About */
+.about-inner{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;  /* copy text left, image right */
+  gap: 1.25rem;
+  align-items:center;
+}
+.about-copy h2{ margin:0 0 .5rem; }
+.about-points{
+  margin: .75rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+.about-cta{ display:flex; gap:.5rem; margin-top:1rem; flex-wrap:wrap; }
+
+.about-photo{
+  margin:0;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  background: var(--surface);
+  /* choose an aspect that suits your picture; tweak as needed */
+  aspect-ratio: 4 / 3;
+}
+.about-photo img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+@media (max-width: 960px){
+  .about-inner{ grid-template-columns: 1fr; }
+  .about-photo{ aspect-ratio: 3 / 2; }
+}
