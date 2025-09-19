@@ -15,6 +15,19 @@ html {
   /* solid color behind any gradients */
   background-color: var(--bg-subtle);
 }
+/* Logo image in the header */
+.brand-logo{
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;         /* matches the old rounded diamond */
+  display: block;
+  object-fit: cover;          /* keeps it square if the PNG isn't */
+  background: transparent;    /* in case your PNG has transparency */
+  border: 1px solid var(--border);
+}
+
+/* If the old .brand-mark CSS is still there, it won't be used anymore,
+   but you can keep it or delete it—no harm either way. */
 
 /* Ensure the background always fills the viewport */
 body {

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,7 @@
   <link rel="stylesheet" href="style.css" />
   <script>
     // Respect saved preference; default to dark
-    (function(){const s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||'dark');})();
+    (function () { const s = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', s || 'dark'); })();
   </script>
 </head>
 
@@ -18,8 +19,8 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="./index.html">
-        <span class="brand-mark" aria-hidden="true">◆</span>
-        <span class="brand-name">WILD PCs</span>
+        <img class="brand-logo" src="./assets/pictures/LOGOSmall.png" alt="Wild PCs" width="28" height="28" />
+        <span class="brand-name">Wild PCs</span>
       </a>
       <nav class="nav">
         <ul class="menu">
@@ -85,7 +86,7 @@
               <td></td>
             </tr>
             <tr tabindex="0">
-              
+
             </tr>
           </tbody>
         </table>
@@ -104,10 +105,10 @@
   </footer>
 
   <script>
-    document.getElementById('year').textContent=new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     // Lightweight client-side filter
-    (function(){
+    (function () {
       const q = document.getElementById('invSearch');
       const rows = Array.from(document.querySelectorAll('#invTable tbody tr'));
       q.addEventListener('input', () => {
@@ -127,4 +128,5 @@
     })();
   </script>
 </body>
+
 </html>

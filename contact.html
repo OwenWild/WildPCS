@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,29 +10,30 @@
   <meta name="theme-color" content="#0f1116">
   <script>
     // respect saved preference; default dark
-    (function(){const s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||'dark');})();
+    (function () { const s = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', s || 'dark'); })();
   </script>
 </head>
+
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="./index.html">
-      <span class="brand-mark" aria-hidden="true">◆</span>
-      <span class="brand-name">WILD PC's</span>
-    </a>
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="./assets/pictures/LOGOSmall.png" alt="Wild PCs" width="28" height="28" />
+        <span class="brand-name">Wild PCs</span>
+      </a>
 
-    <nav class="nav">
-      <ul class="menu">
-        <li><a href="./index.html" aria-current="page">Home</a></li>
-        <li><a href="./build.html">Build</a></li>
-        <li><a href="./inventory.html">Current Inventory</a></li>
-        <li><a href="./contact.html">Support</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+      <nav class="nav">
+        <ul class="menu">
+          <li><a href="./index.html" aria-current="page">Home</a></li>
+          <li><a href="./build.html">Build</a></li>
+          <li><a href="./inventory.html">Current Inventory</a></li>
+          <li><a href="./contact.html">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main id="main" class="section">
     <div class="container" style="max-width:720px;">
@@ -52,7 +54,8 @@
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="Message" rows="6" required placeholder="Tell me what you’re looking for…"></textarea>
+            <textarea id="message" name="Message" rows="6" required
+              placeholder="Tell me what you’re looking for…"></textarea>
           </div>
         </div>
 
@@ -60,7 +63,7 @@
           <button class="btn" type="submit">Send</button>
           <a class="btn btn-ghost" href="index.html">Back</a>
         </div>
-       </form>
+      </form>
     </div>
   </main>
 
@@ -70,6 +73,7 @@
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
+
 </html>
